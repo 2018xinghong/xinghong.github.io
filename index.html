@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			position:relative;
+			text-align: center;
+			width: 1000px;
+			margin: 10px auto;
+			overflow:hidden;
+		}
+		img {
+			width: 1000px;
+			height: 600px;
+		}
+		span {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			/*left: 0;*/
+			margin: auto;
+			width: 30px;
+			height: 60px;
+			line-height: 60px;
+			color: #fff;
+			background-color: rgba(0, 0, 0, .5);
+		}
+		span:hover {
+			color: red;
+			background-color: #ccc;
+			cursor: pointer;
+		}
+		div #s2 {
+			right:0;
+		}
+		#s1 {
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<img src="images/t0.jpg" id="img">
+		<span id="s1"><</span>
+		<span id="s2">></span>
+	</div>
+
+	<script type="text/javascript">
+		
+		var img = document.getElementById('img'),
+			s1 = document.getElementById('s1'),
+			s2 = document.getElementById('s2'),
+			box = document.getElementById('box');
+		
+		var arr = ['images/t0.jpg', 'images/t1.jpg', 'images/t2.jpg', 'images/t3.jpg', 'images/t4.jpg', 'images/t5.jpg'];
+		var index = 0;
+		var timer = null;
+		s1.onclick = function() {
+			// index--;
+			// if(index<0) {
+			// 	index = 5;
+			// }
+			index = --index<0?5:index;
+			img.src = arr[index];
+		}
+		s2.onclick = function() {
+			// index++;
+			// if(index>5) {
+			// 	index = 0;
+			// }
+			index = ++index>5?0:index;
+			img.src = arr[index];
+		}
+
+		function fun() {
+			timer = setInterval(function() {
+				index = (index+1)%6;
+				img.src = arr[index];
+			}, 1000);
+		}
+		fun();
+		box.onmouseover = function() {
+			clearInterval(timer);
+		}
+		box.onmouseout = function() {
+			fun();
+		}
+	</script>
+</body>
+</html>
